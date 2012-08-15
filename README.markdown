@@ -35,7 +35,7 @@ it's the number part).
 
 Then, you should be able to run:
 
-    $ ./ve/bin/python kraki.py push 1234
+    $ ./ve/bin/kraki push 1234
 
 And see some output. A successful run of a trivial test deployment
 might look something like this:

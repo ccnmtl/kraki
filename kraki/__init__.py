@@ -1,6 +1,5 @@
 import requests
 import os.path
-import sys
 
 
 def read_config():
@@ -69,20 +68,3 @@ def print_log(l):
 
 def indent(t, prefix="    "):
     return '\n'.join([prefix + l for l in t.splitlines()])
-
-
-if __name__ == "__main__":
-    try:
-        API_KEY, ROLF_BASE = read_config()
-    except IOError:
-        print "Could not read API KEY from ~/.kraki_config.txt"
-        sys.exit(1)
-
-    if len(sys.argv) < 3:
-        print "not enough arguments"
-        print "kraki.py ACTION DEPLOYMENT_ID"
-        sys.exit(1)
-    action = sys.argv[1]
-    deployment_id = sys.argv[2]
-    r = RolfClient(ROLF_BASE, API_KEY)
-    r.run(action, deployment_id)
