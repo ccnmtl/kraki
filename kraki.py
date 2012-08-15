@@ -48,26 +48,23 @@ class RolfClient(object):
             if sr.json['status'] != 'ok':
                 print "!!! Stage failed"
                 for l in sr.json['logs']:
-                    print "--- Command: "
-                    print indent(l['command'], ">>> ")
-                    if 'stdout' in l:
-                        print "--- STDOUT: "
-                        print indent(l['stdout'])
-                    if 'stderr' in l:
-                        print '--- STDERR: '
-                        print indent(l['stderr'])
+                    print_log(l)
                 break
             print "Stage succeeded"
             for l in sr.json['logs']:
-                if 'command' in l:
-                    print "--- Command: "
-                    print indent(l['command'], ">>> ")
-                if 'stdout' in l and l['stdout'] != u'':
-                    print "--- STDOUT: "
-                    print indent(l['stdout'])
-                if 'stderr' in l and l['stderr'] != u'':
-                    print '--- STDERR: '
-                    print indent(l['stderr'])
+                print_log(l)
+
+
+def print_log(l):
+    if 'command' in l:
+        print "--- Command: "
+        print indent(l['command'], ">>> ")
+    if 'stdout' in l and l['stdout'] != u'':
+        print "--- STDOUT: "
+        print indent(l['stdout'])
+    if 'stderr' in l and l['stderr'] != u'':
+        print '--- STDERR: '
+        print indent(l['stderr'])
 
 
 def indent(t, prefix="    "):
