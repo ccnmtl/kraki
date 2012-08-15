@@ -3,6 +3,7 @@ import os.path
 import sys
 from kraki import RolfClient
 
+
 def read_config():
     with open(os.path.expanduser("~/.kraki_config.txt"), "r") as kfile:
         fields = dict()
