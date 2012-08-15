@@ -6,19 +6,22 @@ def get_api_key():
     with open(os.path.expanduser("~/.kraki_api_key.txt"), "r") as kfile:
         return kfile.read()
 
+class RolfClient(object):
+    def __init__(self, API_KEY):
+        self.API_KEY = API_KEY
 
-def run(API_KEY, action, deployment_id):
-    if action != "push":
-        print "sorry, so far kraki only supports pushing"
-        return
-    push(API_KEY, deployment_id)
+    def run(self, action, deployment_id):
+        if action != "push":
+            print "sorry, so far kraki only supports pushing"
+            return
+        self.push(deployment_id)
 
-def push(API_KEY, deployment_id):
-    url = "https://rolf.ccnmtl.columbia.edu/api/1.0/push/"
-    r = requests.post(url, params=dict(API_KEY=API_KEY,
-                                       deployment_id=deployment_id),
-                      verify=False)
-    print r.status_code
+    def push(self, deployment_id):
+        url = "https://rolf.ccnmtl.columbia.edu/api/1.0/push/"
+        r = requests.post(url, params=dict(API_KEY=self.API_KEY,
+                                           deployment_id=deployment_id),
+                          verify=False)
+        print r.status_code
 
 if __name__ == "__main__":
     try:
@@ -33,6 +36,6 @@ if __name__ == "__main__":
         sys.exit(1)
     action = sys.argv[1]
     deployment_id = sys.argv[2]
-
-    run(API_KEY, action, deployment_id)
+    r = RolfClient(API_KEY)
+    r.run(action, deployment_id)
     
