@@ -61,3 +61,22 @@ might look something like this:
         here is some output to test formatting with
     --- STDERR ---
         and some error output too
+
+## Future Development
+
+If you want to pitch in, these areas are all in need of help:
+
+* Currently, "push" is the only supported action. Would be nice to be
+  able to query stuff, do rollbacks, etc.
+* This is not heavily tested yet. Don't use it if you don't think you
+  can help debug it.
+* particularly, the config file and argument parsing are not robust
+* Is 7 days a good duration for timed keys? Thoughts?
+* colored output? green success headers and red failures?
+* two-way key generation handshake? ie, you run kraki on the
+  commandline without an API key, it generates a random hash, sends
+  you to a rolf URL that uses that random hash along with your
+  username to generate a token. That would allow us to generate tokens
+  that aren't directly tied to an IP address. Still thinking about how
+  this should all work to be as smooth as possible without opening up
+  gaping security holes.
