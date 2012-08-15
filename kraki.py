@@ -36,7 +36,7 @@ class RolfClient(object):
             return
 
         for stage in r.json['stages']:
-            print "=== STAGE: %s" % stage['name']
+            print "=== STAGE: %s ===" % stage['name']
             sr = requests.post(
                 self.ROLF_BASE + stage['url'],
                 headers=dict(ROLF_API_KEY=self.API_KEY),
@@ -57,13 +57,13 @@ class RolfClient(object):
 
 def print_log(l):
     if 'command' in l:
-        print "--- Command: "
+        print "--- Command ---"
         print indent(l['command'], ">>> ")
     if 'stdout' in l and l['stdout'] != u'':
-        print "--- STDOUT: "
+        print "--- STDOUT ---"
         print indent(l['stdout'])
     if 'stderr' in l and l['stderr'] != u'':
-        print '--- STDERR: '
+        print '--- STDERR ---'
         print indent(l['stderr'])
 
 
