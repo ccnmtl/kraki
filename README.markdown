@@ -72,7 +72,6 @@ If you want to pitch in, these areas are all in need of help:
   can help debug it.
 * particularly, the config file and argument parsing are not robust
 * Is 7 days a good duration for timed keys? Thoughts?
-* colored output? green success headers and red failures?
 * two-way key generation handshake? ie, you run kraki on the
   commandline without an API key, it generates a random hash, sends
   you to a rolf URL that uses that random hash along with your

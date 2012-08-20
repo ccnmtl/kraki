@@ -8,7 +8,7 @@ setup(
     url="",
     description="Commandline interface for Rolf",
     long_description="Simple commandline tool for interfacing with the Rolf deployment manager",
-    install_requires = ['requests'],
+    install_requires = ['requests', 'blessings'],
     scripts = ['scripts/kraki'],
     license = "BSD",
     platforms = ["any"],

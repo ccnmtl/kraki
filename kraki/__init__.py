@@ -1,6 +1,8 @@
 import requests
 import os.path
+from blessings import Terminal
 
+term = Terminal()
 
 def read_config():
     with open(os.path.expanduser("~/.kraki_config.txt"), "r") as kfile:
@@ -18,7 +20,7 @@ class RolfClient(object):
 
     def run(self, action, deployment_id):
         if action != "push":
-            print "sorry, so far kraki only supports pushing"
+            print term.red("sorry, so far kraki only supports pushing")
             return
         self.push(deployment_id)
 
@@ -30,39 +32,39 @@ class RolfClient(object):
                           verify=False)
 
         if r.status_code != 200:
-            print r.status_code
-            print str(r.content)
+            print term.red(r.status_code)
+            print term.red(str(r.content))
             return
 
         for stage in r.json['stages']:
-            print "=== STAGE: %s ===" % stage['name']
+            print term.bold("\n=== STAGE: %s ===" % stage['name'])
             sr = requests.post(
                 self.ROLF_BASE + stage['url'],
                 headers=dict(ROLF_API_KEY=self.API_KEY),
                 verify=False)
             if sr.status_code != 200:
-                print "!!! Error: %d" % sr.status_code
-                print r.content
+                print term.red("!!! Error: %d" % sr.status_code)
+                print term.red(r.content)
                 break
             if sr.json['status'] != 'ok':
-                print "!!! Stage failed"
+                print term.red("!!! Stage failed")
                 for l in sr.json['logs']:
                     print_log(l)
                 break
-            print "Stage succeeded"
+            print term.green("Stage succeeded")
             for l in sr.json['logs']:
                 print_log(l)
 
 
 def print_log(l):
     if 'command' in l:
-        print "--- Command ---"
-        print indent(l['command'], ">>> ")
+        print term.cyan("--- Command ---")
+        print term.cyan(indent(l['command'], ">>> "))
     if 'stdout' in l and l['stdout'] != u'':
-        print "--- STDOUT ---"
+        print term.magenta("--- STDOUT ---")
         print indent(l['stdout'])
     if 'stderr' in l and l['stderr'] != u'':
-        print '--- STDERR ---'
+        print term.yellow('--- STDERR ---')
         print indent(l['stderr'])
 
 
