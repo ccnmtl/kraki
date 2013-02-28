@@ -36,7 +36,7 @@ class RolfClient(object):
             print term.red(str(r.content))
             return
 
-        for stage in r.json['stages']:
+        for stage in r.json()['stages']:
             print term.bold("\n=== STAGE: %s ===" % stage['name'])
             sr = requests.post(
                 self.ROLF_BASE + stage['url'],
@@ -46,13 +46,13 @@ class RolfClient(object):
                 print term.red("!!! Error: %d" % sr.status_code)
                 print term.red(r.content)
                 break
-            if sr.json['status'] != 'ok':
+            if sr.json()['status'] != 'ok':
                 print term.red("!!! Stage failed")
-                for l in sr.json['logs']:
+                for l in sr.json()['logs']:
                     print_log(l)
                 break
             print term.green("Stage succeeded")
-            for l in sr.json['logs']:
+            for l in sr.json()['logs']:
                 print_log(l)
 
 
