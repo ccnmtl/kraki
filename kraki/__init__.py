@@ -1,6 +1,7 @@
 import requests
 import os.path
 from blessings import Terminal
+import sys
 
 term = Terminal()
 
@@ -45,12 +46,12 @@ class RolfClient(object):
             if sr.status_code != 200:
                 print term.red("!!! Error: %d" % sr.status_code)
                 print term.red(r.content)
-                break
+                sys.exit(1)
             if sr.json()['status'] != 'ok':
                 print term.red("!!! Stage failed")
                 for l in sr.json()['logs']:
                     print_log(l)
-                break
+                sys.exit(1)
             print term.green("Stage succeeded")
             for l in sr.json()['logs']:
                 print_log(l)
