@@ -32,7 +32,7 @@ class RolfClient(object):
                           headers=dict(ROLF_API_KEY=self.API_KEY),
                           verify=False)
 
-        if r.status_code) != 200:
+        if r.status_code != '200:
             print term.red(str(r.status_code))
             print term.red(str(r.content))
             return
