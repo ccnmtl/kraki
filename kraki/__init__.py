@@ -63,10 +63,10 @@ def print_log(l):
         print term.cyan(indent(l['command'], ">>> "))
     if 'stdout' in l and l['stdout'] != u'':
         print term.magenta("--- STDOUT ---")
-        print indent(l['stdout'])
+        print indent(l['stdout'].encode('ascii', 'ignore'))
     if 'stderr' in l and l['stderr'] != u'':
         print term.yellow('--- STDERR ---')
-        print indent(l['stderr'])
+        print indent(l['stderr'].encode('ascii', 'ignore'))
 
 
 def indent(t, prefix="    "):
