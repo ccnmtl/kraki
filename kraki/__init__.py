@@ -47,8 +47,7 @@ class RolfClient(object):
             print term.bold("\n=== STAGE: %s ===" % stage['name'])
             sr = requests.post(
                 self.ROLF_BASE + stage['url'],
-                headers=dict(ROLF_API_KEY=self.API_KEY),
-                verify=False)
+                headers=dict(ROLF_API_KEY=self.API_KEY))
             if sr.status_code != 200:
                 print term.red("!!! Error: %d" % sr.status_code)
                 print term.red(r.content)
