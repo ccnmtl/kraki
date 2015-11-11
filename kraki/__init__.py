@@ -2,8 +2,13 @@ import requests
 import os.path
 from blessings import Terminal
 import sys
-import urllib3.contrib.pyopenssl
-urllib3.contrib.pyopenssl.inject_into_urllib3()
+import urllib3
+import certifi
+
+http = urllib3.PoolManager(
+    cert_reqs='CERT_REQUIRED', # Force certificate check.
+    ca_certs=certifi.where(),  # Path to the Certifi bundle.
+)
 
 term = Terminal()
 

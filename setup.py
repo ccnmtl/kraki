@@ -8,7 +8,7 @@ setup(
     url="",
     description="Commandline interface for Rolf",
     long_description="Simple commandline tool for interfacing with the Rolf deployment manager",
-    install_requires = ['requests', 'blessings', 'pyopenssl', 'ndg-httpsclient', 'pyasn1'],
+    install_requires = ['requests', 'blessings', 'pyopenssl', 'ndg-httpsclient', 'pyasn1', 'cryptography', 'certifi', 'urllib3'],
     scripts = ['scripts/kraki'],
     license = "BSD",
     platforms = ["any"],
