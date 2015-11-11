@@ -36,8 +36,7 @@ class RolfClient(object):
         url = ("%s/api/1.0/deployment/%d/push/"
                % (self.ROLF_BASE, int(deployment_id)))
         r = requests.post(url,
-                          headers=dict(ROLF_API_KEY=self.API_KEY),
-                          verify=False)
+                          headers=dict(ROLF_API_KEY=self.API_KEY))
 
         if r.status_code != 200:
             print term.red(str(r.status_code))
